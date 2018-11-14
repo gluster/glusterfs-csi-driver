@@ -62,11 +62,27 @@ func (cs *ControllerServer) ParseCreateVolRequest(req *csi.CreateVolumeRequest) 
 	var gdReq api.VolCreateReq
 
 	reqConf.gdVolReq = &gdReq
-
+	snapshotEnabled := true
 	// Get Volume name
 	if req != nil {
 		reqConf.gdVolReq.Name = req.Name
 	}
+
+	for k, v := range req.GetParameters() {
+
+		switch strings.ToLower(k) {
+
+		// Placeholder for more SC parameters.
+		case "snapshotenabled":
+			snapshotEnabled = strings.ToLower(v) == "true"
+
+		default:
+			return nil, fmt.Errorf("invalid option %s given for %s CSI driver", k, glusterfsCSIDriverName)
+		}
+	}
+
+	reqConf.gdVolReq.SnapshotEnabled = snapshotEnabled
+
 	return &reqConf, nil
 }
 
