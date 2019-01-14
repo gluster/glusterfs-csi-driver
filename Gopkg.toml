@@ -27,6 +27,10 @@
   name = "github.com/docker/distribution"
 
 [[override]]
+  name = "github.com/docker/docker"
+  revision = "7848b8beb9d38a98a78b75f78e05f8d2255f9dfe"
+
+[[override]]
   branch = "release-branch.go1.10"
   name = "golang.org/x/net"
 
@@ -50,9 +54,13 @@
   version = "kubernetes-1.13.1"
   name = "k8s.io/api"
 
+[[constraint]]
+  name = "k8s.io/client-go"
+  version = "kubernetes-1.13.1"
+
 [[override]]
- name = "k8s.io/apiextensions-apiserver"
- version = "kubernetes-1.13.1"
+  name = "k8s.io/apiextensions-apiserver"
+  version = "kubernetes-1.13.1"
 
 [[override]]
   version = "kubernetes-1.13.1"
